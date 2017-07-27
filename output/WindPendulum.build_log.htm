@@ -1,0 +1,102 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.14.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 2, 3, LIC=DSNVE-5CV7T-F0EN5-G7RVE-ETB5B-173EW
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.13.0
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+C:\Users\b1101\Documents\GitHub\fenglibai\WindPendulum.uvprojx
+Project File Date:  07/27/2017
+
+<h2>Output:</h2>
+Build target 'WindPendulum'
+compiling ctrl.c...
+app\ctrl.c(23): warning:  #223-D: function "sqrt" declared implicitly
+        omega=sqrt(9.6949/L);
+app\ctrl.c(24): warning:  #223-D: function "atan" declared implicitly
+        max_angle_radian=atan(laser_radium/H);
+app\ctrl.c(24): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        max_angle_radian=atan(laser_radium/H);
+app\ctrl.c(26): warning:  #223-D: function "pow" declared implicitly
+        swing_period=2*3.1415926*sqrt(L/9.6949)*(1+0.25*pow(sin(max_angle_radian/2),2)+0.140625*pow(sin(max_angle_radian/2),4));
+app\ctrl.c(26): warning:  #223-D: function "sin" declared implicitly
+        swing_period=2*3.1415926*sqrt(L/9.6949)*(1+0.25*pow(sin(max_angle_radian/2),2)+0.140625*pow(sin(max_angle_radian/2),4));
+app\ctrl.c(43): warning:  #223-D: function "cos" declared implicitly
+                Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(57): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(78): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(79): warning:  #223-D: function "tan" declared implicitly
+        calc_init(0.3*tan(line_angle));
+app\ctrl.c(112): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(118): warning:  #1295-D: Deprecated declaration mode6 - give arg types
+  void mode6();
+app\ctrl.c: 11 warnings, 0 errors
+compiling ctrl.c...
+app\ctrl.c(23): warning:  #223-D: function "sqrt" declared implicitly
+        omega=sqrt(9.6949/L);
+app\ctrl.c(24): warning:  #223-D: function "atan" declared implicitly
+        max_angle_radian=atan(laser_radium/H);
+app\ctrl.c(24): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        max_angle_radian=atan(laser_radium/H);
+app\ctrl.c(26): warning:  #223-D: function "pow" declared implicitly
+        swing_period=2*3.1415926*sqrt(L/9.6949)*(1+0.25*pow(sin(max_angle_radian/2),2)+0.140625*pow(sin(max_angle_radian/2),4));
+app\ctrl.c(26): warning:  #223-D: function "sin" declared implicitly
+        swing_period=2*3.1415926*sqrt(L/9.6949)*(1+0.25*pow(sin(max_angle_radian/2),2)+0.140625*pow(sin(max_angle_radian/2),4));
+app\ctrl.c(43): warning:  #223-D: function "cos" declared implicitly
+                Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(57): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(78): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(79): warning:  #223-D: function "tan" declared implicitly
+        calc_init(0.3*tan(line_angle));
+app\ctrl.c(112): warning:  #223-D: function "cos" declared implicitly
+        Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+app\ctrl.c(118): warning:  #1295-D: Deprecated declaration mode6 - give arg types
+  void mode6();
+app\ctrl.c: 11 warnings, 0 errors
+compiling L298N.c...
+app\L298N.c(101): warning:  #1-D: last line of file ends without a newline
+  }
+app\L298N.c: 1 warning, 0 errors
+compiling pid.c...
+app\pid.c(40): warning:  #550-D: variable "Gyro_y" was set but never used
+        static float Gyro_y;   //Y????????
+app\pid.c(94): warning:  #550-D: variable "Gyro_y" was set but never used
+        static float Gyro_y;   //Y????????
+app\pid.c: 2 warnings, 0 errors
+linking...
+.\output\WindPendulum.axf: Warning: L6304W: Duplicate input file .\output\ctrl_1.o ignored.
+.\output\WindPendulum.axf: Warning: L6304W: Duplicate input file .\output\l298n_1.o ignored.
+.\output\WindPendulum.axf: Warning: L6304W: Duplicate input file .\output\pid_1.o ignored.
+Program Size: Code=26584 RO-data=1104 RW-data=1444 ZI-data=3964  
+Finished: 0 information, 3 warning and 0 error messages.
+".\output\WindPendulum.axf" - 0 Error(s), 28 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  C:\Users\b1101\Documents\GitHub\fenglibai\RTE
+  C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+</pre>
+</body>
+</html>
