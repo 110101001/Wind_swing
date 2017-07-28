@@ -28,7 +28,7 @@ typedef struct
 
 void set_pid(PID_Type* PID,float kp,float ki,float kd);
 void pid_cal(PID_Type* PID);
-float Kalman_Filter1(float Accel,float Gyro);		
-float Kalman_Filter2(float Accel,float Gyro);		
+//float Kalman_Filter1(float Accel,float Gyro);		
+//float Kalman_Filter2(float Accel,float Gyro);		
 
 #endif

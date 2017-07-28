@@ -5,19 +5,21 @@
 
 int mode;
 int mode_flag,mode_change_flag;
+extern float Roll,Pitch,Yaw;    				//???
+
 
 extern PID_Type* Motor_X;
 extern PID_Type* Motor_Y;
 
 extern uint32_t time_count;
 
-float laser_radium;//激光笔半径,单位m
-float max_angle_degree,max_angle_radian;//角度制&弧度制
-float swing_period;
-float omega;//角频率
+double laser_radium;//激光笔半径,单位m
+double max_angle_degree,max_angle_radian;//角度制&弧度制
+double swing_period;
+double omega;//角频率
 	
-float time=0;//time单位s
-void calc_init(float laser_radium)
+double time=0;//time单位s
+void calc_init(double laser_radium)
 {
 	omega=sqrt(9.6949/L);
 	max_angle_radian=atan(laser_radium/H);
@@ -32,11 +34,6 @@ void calc_init(float laser_radium)
 //	return(sqrt(2*L*9.6949*(cos(max_angle_radian)-cos(alpha))));
 //}
 
-int get_mode()
-{
-	//mode=  ;
-}
-
 void mode_switch(int mode)
 {
 
@@ -46,15 +43,15 @@ void mode1()//15s内画不小于50cm直线
 {
 	if(mode_change_flag==1)
 	{
-		delay_ms(5000);//使风力摆稳定下来
+		Delay_ms(5000);//使风力摆稳定下来
 		time=0;
 	  calc_init(LASER_RADIUM_1);//0.25为半径
-    set_pid(Motor_X,0.01,0,0);
-	  set_pid(Motor_Y,0.01,0,0);
+    set_pid(Motor_X,20,0,0);
+	  set_pid(Motor_Y,20,0,0);
 	  mode_change_flag=0;
 	}
-	  time+=1/1000;
-		Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
+	  time+=(1/1000+(TIM2->CNT - time_count)/1000000);
+		Motor_X->ref=max_angle_radian*cos(omega*time);
 		Motor_Y->ref=0;
 		pid_cal(Motor_X);
 		pid_cal(Motor_Y);
@@ -64,14 +61,14 @@ void mode2()//30-60cm直线
 {
 		if(mode_change_flag==1)
 	{
-		delay_ms(5000);
+		Delay_ms(5000);
 		time=0;
 	  calc_init(LASER_RADIUM_2);//0.25为半径
     set_pid(Motor_X,0,0,0);
 	  set_pid(Motor_Y,0,0,0);
 	  mode_change_flag=0;
 	}
-	time+=1/1000;
+	time+=(1/1000+(TIM2->CNT - time_count)/1000000);
 	Motor_X->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
   Motor_Y->ref=0;
 	pid_cal(Motor_X);
@@ -91,7 +88,7 @@ void mode3()//设置角度(弧度制)，不小于20cm
 	line_angle>=0?(phase=0):(phase=3.1415926);
 		if(mode_change_flag==1)
 	{
-		delay_ms(5000);
+		Delay_ms(5000);
 		time=0;
 	  calc_init(LASER_RADIUM_3);//0.25为半径
 		Ax=max_angle_radian;
@@ -100,7 +97,7 @@ void mode3()//设置角度(弧度制)，不小于20cm
 	  set_pid(Motor_Y,0,0,0);
 	  mode_change_flag=0;
 	}
-	time+=1/1000;
+	time+=(1/1000+(TIM2->CNT - time_count)/1000000);
 	Motor_X->ref=Ax*cos(omega*(time+=(TIM2->CNT - time_count)/1000000));
   Motor_Y->ref=max_angle_radian*cos(omega*(time+=(TIM2->CNT - time_count)/1000000)+phase);
 	pid_cal(Motor_X);
@@ -113,13 +110,13 @@ void mode4()
 {
 		if(mode_change_flag==1)
 	{
-		delay_ms(5000);//使风力摆稳定下来
+		Delay_ms(5000);//使风力摆稳定下来
 		time=0;
     set_pid(Motor_X,0,0,0);
 	  set_pid(Motor_Y,0,0,0);
 	  mode_change_flag=0;
 	}
-	time+=1/1000;
+	time+=(1/1000+(TIM2->CNT - time_count)/1000000);
 	Motor_X->ref=0;
   Motor_Y->ref=0;
 		pid_cal(Motor_X);
@@ -134,7 +131,7 @@ void mode5()
 {		
 	if(mode_change_flag==1)
 	{
-		delay_ms(5000);//使风力摆稳定下来
+		Delay_ms(5000);//使风力摆稳定下来
 		time=0;
 	  calc_init(LASER_RADIUM_5);//0.25为半径
     set_pid(Motor_X,0,0,0);
@@ -149,4 +146,4 @@ void mode5()
 	Set_Motor(Motor_X->output,Motor_Y->output);
 }
 
-void mode6();
+//void mode6();

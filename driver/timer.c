@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern int mode;
+
 extern float Roll,Pitch,Yaw;  
 uint32_t time_count;
 //int mode_flag=0,mode_change_flag=0;
@@ -89,10 +91,10 @@ void TIM5_IRQHandler(void)
 			case 3: mode3(); break;
 			case 4: mode4(); break;
 			case 5: mode5(); break;
-			case 6: mode6(); break;
+			//case 6: mode6(); break;
 			default:break;
 		}	
-
+	//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->ref,Motor_Y->ref,0);
 	TIM_ClearITPendingBit(TIM5,TIM_IT_Update);
 }
 }

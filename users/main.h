@@ -2,6 +2,7 @@
 #define _MAIN_H_
 
 #include "stm32f4xx.h"
+#include "math.h"
 #include "stdio.h"
 #include "mymath.h"
 #include "led.h"

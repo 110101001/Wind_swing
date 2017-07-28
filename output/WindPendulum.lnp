@@ -1,9 +1,6 @@
 --cpu Cortex-M4.fp
 ".\output\startup_stm32f40xx.o"
 ".\output\main.o"
-".\output\ctrl_1.o"
-".\output\pid_1.o"
-".\output\l298n_1.o"
 ".\output\timer.o"
 ".\output\usart.o"
 ".\output\led.o"

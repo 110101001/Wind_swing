@@ -7,7 +7,7 @@
 #define LASER_RADIUM_5 0.15
 #define LASER_RADIUM_6
 
-void calc_init(float laser_radium);
+void calc_init(double laser_radium);
 
 void mode1(void);//15s内画不小于50cm直线
 void mode2(void);//30-60cm直线
@@ -16,8 +16,7 @@ void mode4(void);
 void mode5(void);
 void mode6(void);
 
-int get_mode();
 void mode_switch(int mode);
-void ctrl_init();
+void ctrl_init(void);
 
 #endif
