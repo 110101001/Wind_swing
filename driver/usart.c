@@ -75,8 +75,6 @@ void Usart1_Init(u32 br_num)
 }
 
 
-
-
 void USART1_IRQHandler(void)
 {
 	u8 com_data;
@@ -85,7 +83,6 @@ void USART1_IRQHandler(void)
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
 		com_data = USART1->DR;
 		Usart1_DataPrepare(com_data);												//数据解析
-
 	}
 }
 
@@ -212,7 +209,7 @@ void USART2_IRQHandler(void)
 	{
 		com_data = USART2->DR;
 	}
-	if( USART_GetITStatus(USART2,USART_IT_RXNE) )				//接收中断
+	if(USART_GetITStatus(USART2,USART_IT_RXNE))				//接收中断
 	{
 		USART_ClearITPendingBit(USART2,USART_IT_RXNE);
 		com_data = USART2->DR;

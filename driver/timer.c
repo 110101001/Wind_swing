@@ -1,8 +1,9 @@
 #include "main.h"
 
 extern float Roll,Pitch,Yaw;  
-int mode=0;
 uint32_t time_count;
+//int mode_flag=0,mode_change_flag=0;
+
 
 extern PID_Type* Motor_X;
 extern PID_Type* Motor_Y;
@@ -70,7 +71,7 @@ void TIM5_IRQHandler(void)
 	  MPU6050_Data_Prepare(1/1000.0f+(TIM2->CNT-time_count)/1000000.0f);
   	IMUupdate(0.5f *(1/1000.0f+(TIM2->CNT-time_count)/1000000.0f),mpu6050.Gyro_deg.x, mpu6050.Gyro_deg.y, mpu6050.Gyro_deg.z, //??IMU
 						mpu6050.Acc.x, mpu6050.Acc.y, mpu6050.Acc.z,&Roll,&Pitch,&Yaw);
-
+    Motor_X->now=Roll,Motor_Y->now=Pitch;
 //				for(int i=0;i<3;i++)
 //		{
 //			pitch_now= ,roll_now=  ;
@@ -81,16 +82,17 @@ void TIM5_IRQHandler(void)
 //		pitch_now = Kalman_Filter1(pitch_now,Axis.GyroY);       //¿¨¶ûÂüÂË²¨Æ÷
 //		roll_now  = Kalman_Filter2(roll_now,-Axis.GyroX);       //¿¨¶ûÂüÂË²¨Æ÷		  
 //	}
-			switch(mode)
+				switch(mode)
 		{	
 			case 1: mode1(); break;
 			case 2: mode2(); break;
 			case 3: mode3(); break;
-//			case 4: mode4(); break;
-//			case 5: mode5(); break;
-//			case 6: mode6(); break;
+			case 4: mode4(); break;
+			case 5: mode5(); break;
+			case 6: mode6(); break;
 			default:break;
 		}	
+
 	TIM_ClearITPendingBit(TIM5,TIM_IT_Update);
 }
 }

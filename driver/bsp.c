@@ -1,7 +1,15 @@
 #include "main.h"
 
+PID_Type MX={0,0,0,0,0,0,0,0,0,0};
+PID_Type MY={0,0,0,0,0,0,0,0,0,0};
+
+extern PID_Type* Motor_X;
+extern PID_Type* Motor_Y;
+
 void All_Init(void)
 {
+	Motor_X=&MX;
+	Motor_Y=&MY;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);    
 	LED_Configuration();																//LED≥ı ºªØ
 	TIM2_Configuration();	

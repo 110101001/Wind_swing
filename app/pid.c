@@ -3,18 +3,12 @@
 PID_Type* Motor_X;
 PID_Type* Motor_Y;
 
-PID_Type MX={0,0,0,0,0,0,0,0,0,0};
-PID_Type MY={0,0,0,0,0,0,0,0,0,0};
-
 void set_pid(PID_Type* PID,float kp,float ki,float kd)
 {
-	Motor_X=&MX;
-	Motor_Y=&MY;
 	PID->kp=kp;
 	PID->ki=ki;
 	PID->kd=kd;
 	PID->errNow=PID->errOld1=PID->errOld2=0;
-
 }
 
 void pid_cal(PID_Type* PID)
