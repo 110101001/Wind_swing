@@ -13,11 +13,11 @@
 ".\output\pwm.o"
 ".\output\filter.o"
 ".\output\mymath.o"
-".\output\ctrl_1.o"
+".\output\ctrl.o"
 ".\output\datatransfer.o"
 ".\output\imu.o"
-".\output\l298n_1.o"
-".\output\pid_1.o"
+".\output\l298n.o"
+".\output\pid.o"
 ".\output\misc.o"
 ".\output\stm32f4xx_adc.o"
 ".\output\stm32f4xx_can.o"
@@ -50,7 +50,7 @@
 ".\output\stm32f4xx_usart.o"
 ".\output\stm32f4xx_wwdg.o"
 ".\output\system_stm32f4xx.o"
---strict --scatter ".\output\WindPendulum.sct"
+--library_type=microlib --strict --scatter ".\output\WindPendulum.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\output\WindPendulum.map" -o .\output\WindPendulum.axf

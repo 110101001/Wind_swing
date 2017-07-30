@@ -66,13 +66,24 @@ void TIM5_Configuration(int arr,int psc)//1000-1,84-1,1ms进入一次中断
 
 void TIM5_IRQHandler(void)
 {
+ static u32 Time_Ms=0;
+	static u32 Time_Last=0;
 	time_count=TIM2->CNT;
 	if(TIM_GetITStatus(TIM5,TIM_IT_Update)==SET) 
 	{
+		Time_Ms++;
+		if (Time_Ms%2==0){
 		MPU6050_Read();
-	  MPU6050_Data_Prepare(1/1000.0f+(TIM2->CNT-time_count)/1000000.0f);
-  	IMUupdate(0.5f *(1/1000.0f+(TIM2->CNT-time_count)/1000000.0f),mpu6050.Gyro_deg.x, mpu6050.Gyro_deg.y, mpu6050.Gyro_deg.z, //??IMU
+	  MPU6050_Data_Prepare((TIM2->CNT-Time_Last)/1000000.0f);
+  	IMUupdate(0.5f *((TIM2->CNT-Time_Last)/1000000.0f),mpu6050.Gyro_deg.x, mpu6050.Gyro_deg.y, mpu6050.Gyro_deg.z, //??IMU
 						mpu6050.Acc.x, mpu6050.Acc.y, mpu6050.Acc.z,&Roll,&Pitch,&Yaw);
+			Time_Last=TIM2->CNT;
+		}
+		if (Time_Ms%10==0)
+		{
+			ANO_AK8975_Read();	
+		}
+		
     Motor_X->now=Roll,Motor_Y->now=Pitch;
 //				for(int i=0;i<3;i++)
 //		{
@@ -94,6 +105,7 @@ void TIM5_IRQHandler(void)
 			//case 6: mode6(); break;
 			default:break;
 		}	
+		DataTransferTask(Time_Ms);
 	//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->ref,Motor_Y->ref,0);
 	TIM_ClearITPendingBit(TIM5,TIM_IT_Update);
 }

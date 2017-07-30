@@ -224,7 +224,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <RoSelD>3</RoSelD>
@@ -423,26 +423,11 @@
               <FileType>1</FileType>
               <FilePath>.\users\main.c</FilePath>
             </File>
-            <File>
-              <FileName>ctrl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\ctrl.c</FilePath>
-            </File>
-            <File>
-              <FileName>pid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\pid.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>drivers</GroupName>
           <Files>
-            <File>
-              <FileName>L298N.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\L298N.c</FilePath>
-            </File>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>

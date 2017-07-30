@@ -50,12 +50,14 @@ void mode1()//15s内画不小于50cm直线
 	  set_pid(Motor_Y,20,0,0);
 	  mode_change_flag=0;
 	}
-	  time+=(1/1000+(TIM2->CNT - time_count)/1000000);
+	  time+=(double)(1.0f/1000.0f+(TIM2->CNT - time_count)/1000000.0f);
 		Motor_X->ref=max_angle_radian*cos(omega*time);
 		Motor_Y->ref=0;
 		pid_cal(Motor_X);
 		pid_cal(Motor_Y);
 		Set_Motor(Motor_X->output,Motor_Y->output);
+		printf("1\n");
+		//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->output,Motor_Y->output,0);
 }
 void mode2()//30-60cm直线
 {

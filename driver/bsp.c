@@ -13,8 +13,9 @@ void All_Init(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);    
 	LED_Configuration();																//LED初始化
 	TIM2_Configuration();	
-  TIM5_Configuration(99,83);
+  TIM5_Configuration(1000,83);
 	Usart2_Init(115200);																//串口2初始化
+//	printf("0/n");
 	PWM_Configuration();																//PWM初始化
 	GPIO_Configuration();																//GPIO初始化
 	//Para_ResetToFactorySetup();													//从flash读取保存的参数

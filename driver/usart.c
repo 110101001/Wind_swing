@@ -107,7 +107,7 @@ void Usart1_Send(unsigned char *DataToSend ,u8 data_num)
 	}
 	for (;i<num+data_num;i++)
 	{
-		Tx1DMABuffer[i]=*(DataToSend+i-num);
+		Tx1DMABuffer[i]=*((DataToSend+i-num));
 	}
 	len=count1;
 	while (DMA_GetCmdStatus(DMA2_Stream7) != DISABLE){}	//确保DMA可以被设置  
