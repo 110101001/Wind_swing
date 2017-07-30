@@ -1,6 +1,7 @@
 #include "main.h"
 
-extern int mode;
+extern enum PendulumMode NS;	//NS用于切换模式，Stop为停止模式，Task1到Task6分别为题1至题2
+//{ Stop=0,Task1,Task2,Task3,Task4,Task5,Task6 } ;
 
 extern float Roll,Pitch,Yaw;  
 uint32_t time_count;
@@ -95,13 +96,14 @@ void TIM5_IRQHandler(void)
 //		pitch_now = Kalman_Filter1(pitch_now,Axis.GyroY);       //卡尔曼滤波器
 //		roll_now  = Kalman_Filter2(roll_now,-Axis.GyroX);       //卡尔曼滤波器		  
 //	}
-				switch(mode)
+				switch(NS)
 		{	
-			case 1: mode1(); break;
-			case 2: mode2(); break;
-			case 3: mode3(); break;
-			case 4: mode4(); break;
-			case 5: mode5(); break;
+			case Stop: Set_Motor(0,0); break;
+			case Task1: mode1(); break;
+			case Task2: mode2(); break;
+			case Task3: mode3(); break;
+			case Task4: mode4(); break;
+			case Task5: mode5(); break;
 			//case 6: mode6(); break;
 			default:break;
 		}	

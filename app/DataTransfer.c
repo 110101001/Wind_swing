@@ -2,6 +2,7 @@
 u8 data_to_send[50];
 extern PID_Type* Motor_X;
 extern PID_Type* Motor_Y;
+extern int mode_change_flag;
 
 #define BYTE0(dwTemp)       ( *( (char *)(&dwTemp)		) )
 #define BYTE1(dwTemp)       ( *( (char *)(&dwTemp) + 1) )
@@ -116,7 +117,7 @@ void DataTransferTask(u32 sys_time)
 	ANO_DT_Send_Status(Roll,Pitch,Yaw,0,0,0);
 		}
 	else if((sys_time+1)%10==0){
-	ANO_DT_Send_Senser(mpu6050.Acc.x,mpu6050.Acc.y,mpu6050.Acc.z,mpu6050.Gyro.x,
+	ANO_DT_Send_Senser((s16)(Motor_X->ref*57.3f),(s16)(Motor_Y->ref*57.3f),mpu6050.Acc.z,mpu6050.Gyro.x,
 												mpu6050.Gyro.y,mpu6050.Gyro.z,
 												ak8975.Mag_Val.x,ak8975.Mag_Val.y,ak8975.Mag_Val.z);//mpu6050.Acc.x,mpu6050.Acc.y,mpu6050.Acc.z,mpu6050.Gyro.x
 	
@@ -235,9 +236,11 @@ void Data_Receive_Anl(u8 *data_buf,u8 num)
 	}
 	if(*(data_buf+2)==0X22){
 			NS=(enum PendulumMode)(*(data_buf+4));
+			mode_change_flag=1;
 		}
 			if(*(data_buf+2)==0X21){
 			NS=Stop;
+			mode_change_flag=1;
 		}
 if(*(data_buf+2)==0X02)
 	{

@@ -208,8 +208,8 @@ void IMUupdate(float half_T,float gx, float gy, float gz, float ax, float ay, fl
 
 	*rol = fast_atan2(2*(ref_q[0]*ref_q[1] + ref_q[2]*ref_q[3]),1 - 2*(ref_q[1]*ref_q[1] + ref_q[2]*ref_q[2])) *57.3f;
 	*pit = asinf((2*(ref_q[1]*ref_q[3] - ref_q[0]*ref_q[2])))*57.3f;
-	//*yaw = fast_atan2(2*(-ref_q[1]*ref_q[2] - ref_q[0]*ref_q[3]), 2*(ref_q[0]*ref_q[0] + ref_q[1]*ref_q[1]) - 1) *57.3f  ;// 
-	*yaw = yaw_mag;
+	*yaw = fast_atan2(2*(-ref_q[1]*ref_q[2] - ref_q[0]*ref_q[3]), 2*(ref_q[0]*ref_q[0] + ref_q[1]*ref_q[1]) - 1) *57.3f  ;// 
+	//*yaw = yaw_mag;
 
 }
 

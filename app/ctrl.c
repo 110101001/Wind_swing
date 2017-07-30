@@ -46,8 +46,8 @@ void mode1()//15s内画不小于50cm直线
 		Delay_ms(5000);//使风力摆稳定下来
 		time=0;
 	  calc_init(LASER_RADIUM_1);//0.25为半径
-    set_pid(Motor_X,20,0,0);
-	  set_pid(Motor_Y,20,0,0);
+    set_pid(Motor_X,0,0,0);//20 10000 
+	  set_pid(Motor_Y,-3,0,0);
 	  mode_change_flag=0;
 	}
 	  time+=(double)(1.0f/1000.0f+(TIM2->CNT - time_count)/1000000.0f);
@@ -56,8 +56,6 @@ void mode1()//15s内画不小于50cm直线
 		pid_cal(Motor_X);
 		pid_cal(Motor_Y);
 		Set_Motor(Motor_X->output,Motor_Y->output);
-		printf("1\n");
-		//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->output,Motor_Y->output,0);
 }
 void mode2()//30-60cm直线
 {
