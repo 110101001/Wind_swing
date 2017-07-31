@@ -47,7 +47,7 @@ void mode1()//15s内画不小于50cm直线
 		time=0;
 	  calc_init(LASER_RADIUM_1);//0.25为半径
     set_pid(Motor_X,0,0,0);//20 10000 
-	  set_pid(Motor_Y,-5,0,0);
+	  set_pid(Motor_Y,0,-0.01,100);//-5
 	  mode_change_flag=0;
 	}
 	  time+=(double)(1.0f/1000.0f+(TIM2->CNT - time_count)/1000000.0f);

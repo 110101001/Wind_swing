@@ -23,7 +23,7 @@ typedef struct
  float errOld1;
  float errOld2;
  float doutput;//控制增量输出
- int  output;//控制输出
+ float  output;//控制输出
 }PID_Type;
 
 void set_pid(PID_Type* PID,float kp,float ki,float kd);
