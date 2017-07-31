@@ -119,7 +119,7 @@ void DataTransferTask(u32 sys_time)
 	else if((sys_time+1)%10==0){
 	ANO_DT_Send_Senser((s16)(Motor_X->ref*57.3f),(s16)(Motor_Y->ref*57.3f),mpu6050.Acc.z,mpu6050.Gyro.x,
 												mpu6050.Gyro.y,mpu6050.Gyro.z,
-												ak8975.Mag_Val.x,ak8975.Mag_Val.y,ak8975.Mag_Val.z);//mpu6050.Acc.x,mpu6050.Acc.y,mpu6050.Acc.z,mpu6050.Gyro.x
+												Motor_X->output,Motor_Y->output,ak8975.Mag_Val.z);//mpu6050.Acc.x,mpu6050.Acc.y,mpu6050.Acc.z,mpu6050.Gyro.x
 	
 	}
 	else if((sys_time+2)%10==0)
