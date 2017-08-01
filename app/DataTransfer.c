@@ -262,6 +262,8 @@ if(*(data_buf+2)==0X02)
         Motor_Y->kp = -0.001*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
         Motor_Y->ki = -0.001*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
         Motor_Y->kd = -0.1*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
+//				Motor_X->output=0;
+//				Motor_Y->output=0;
 //        RollP_arg.kp 	= 0.001*( (vs16)(*(data_buf+16)<<8)|*(data_buf+17) );
 //        RollP_arg.ki 	= 0.001*( (vs16)(*(data_buf+18)<<8)|*(data_buf+19) );
 //        RollP_arg.kd 	= 0.001*( (vs16)(*(data_buf+20)<<8)|*(data_buf+21) );

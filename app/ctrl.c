@@ -21,7 +21,8 @@ double omega;//角频率
 double time=0;//time单位s
 void calc_init(double laser_radium)
 {
-	omega=sqrt(9.6949/L);
+	//omega=sqrt(9.6949/L);
+	omega=26.3;//26.3是精心选择的数字，不要乱改
 	max_angle_radian=atan(laser_radium/H);
   max_angle_degree=360*max_angle_radian/(2*3.1415926);
 	swing_period=2*3.1415926*sqrt(L/9.6949)*(1+0.25*pow(sin(max_angle_radian/2),2)+0.140625*pow(sin(max_angle_radian/2),4));
@@ -46,8 +47,8 @@ void mode1()//15s内画不小于50cm直线
 		Delay_ms(5000);//使风力摆稳定下来
 		time=0;
 	  calc_init(LASER_RADIUM_1);//0.25为半径
-    set_pid(Motor_X,0,0,0);//20 10000 
-	  set_pid(Motor_Y,0,-0.3,-1200);//-6,,-1200
+    set_pid(Motor_X,-20,-0.004,0);//20 10000 
+	  set_pid(Motor_Y,0,0,0);//0,-0.05,-1200
 	  mode_change_flag=0;
 	}
 	  time+=(double)(1.0f/1000.0f+(TIM2->CNT - time_count)/1000000.0f);
