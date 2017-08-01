@@ -15,10 +15,10 @@ void pid_cal(PID_Type* PID)
 {
   float dErrP, dErrI, dErrD;
 	PID->errNow=PID->ref-PID->now;  
-  dErrP = PID->errNow - PID->errOld1;
+  dErrP = (PID->errNow - PID->errOld1);
   dErrI = PID->errNow;
-  dErrD = PID->errNow - 2.0f * PID->errOld1 + PID->errOld2;
-  PID->doutput = PID->kp * dErrP + PID->ki * dErrI + PID->kd * dErrD;
+  dErrD = (PID->errNow - 2.0f * PID->errOld1 + PID->errOld2);
+  PID->doutput = (PID->kp * dErrP + PID->ki * dErrI + PID->kd * dErrD);
   PID->output += PID->doutput;//Õ¼¿Õ±È
 	PID->errOld2 = PID->errOld1; 
   PID->errOld1 = PID->errNow;  

@@ -49,32 +49,6 @@ void PWM_M4_Backward(int pwm)
 }
 
 
-
-//void Set_Motor(int pwm1,int pwm2)//x方向，y方向
-//{
-//	if(pwm1 >= 0)
-//	{
-//	 	PWM_M2_Forward(pwm1);
-//		PWM_M4_Backward(pwm1);
-//	}
-//	else if(pwm1 < 0)
-//	{
-//	 	PWM_M2_Backward(-pwm1);
-//		PWM_M4_Forward(-pwm1);	
-//	}
-
-//	if(pwm2 >= 0)
-//	{
-//	 	PWM_M1_Forward(pwm2);
-//		PWM_M3_Backward(pwm2);
-//	}
-//	else if(pwm2 < 0)
-//	{
-//	 	PWM_M1_Backward(-pwm2);
-//		PWM_M3_Forward(-pwm2);	
-//	} 	
-//}
-
 void Set_Motor(float pwm1,float pwm2)//x方向，y方向
 {
 	if(pwm1 >= 0)

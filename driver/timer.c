@@ -83,29 +83,18 @@ void TIM5_IRQHandler(void)
 		if (Time_Ms%10==0)
 		{
 			ANO_AK8975_Read();	
-		}
-		
-    Motor_X->now=Roll,Motor_Y->now=Pitch;
-//				for(int i=0;i<3;i++)
-//		{
-//			pitch_now= ,roll_now=  ;
-//			pitch_sum+=pitch_now,roll_sum+=roll_sum;
-//		}
-//		pitch_now=pitch_sum/3;
-//		roll_now=roll_sum/3;
-//		pitch_now = Kalman_Filter1(pitch_now,Axis.GyroY);       //¿¨¶ûÂüÂË²¨Æ÷
-//		roll_now  = Kalman_Filter2(roll_now,-Axis.GyroX);       //¿¨¶ûÂüÂË²¨Æ÷		  
-//	}
+			Motor_X->now=Roll,Motor_Y->now=Pitch;
 				switch(NS)
-		{	
-			case Stop: Set_Motor(0,0); break;
-			case Task1: mode1(); break;
-			case Task2: mode2(); break;
-			case Task3: mode3(); break;
-			case Task4: mode4(); break;
-			case Task5: mode5(); break;
-			//case 6: mode6(); break;
-			default:break;
+	    	{	
+		    	case Stop: Set_Motor(0,0); break;
+			    case Task1: mode1(); break;
+		    	case Task2: mode2(); break;
+		    	case Task3: mode3(); break;
+			    case Task4: mode4(); break;
+			    case Task5: mode5(); break;
+			    //case 6: mode6(); break;
+			    default:break;
+		    }	
 		}	
 		DataTransferTask(Time_Ms);
 	//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->ref,Motor_Y->ref,0);
