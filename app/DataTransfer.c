@@ -124,15 +124,20 @@ void DataTransferTask(u32 sys_time)
 	}
 	else if((sys_time+2)%10==0)
 	{
-		if (send_pid1){ANO_DT_Send_PID(1,-Motor_X->kp,-Motor_X->ki,-Motor_X->kd,
+		if (send_pid1){
+			ANO_DT_Send_PID(1,-Motor_X->kp,-Motor_X->ki,-Motor_X->kd,
 																			-Motor_Y->kp,-Motor_Y->ki,-Motor_Y->kd,
 																			0,0,0);
-		send_pid1=0;}
+		send_pid1=0;
+		mode_change_flag=1;
+
+		}
 		else if(send_pid2){
 		ANO_DT_Send_PID(2,0,0,0,
 																			0,0,0,
 																			0,0,0);
 		send_pid2=0;
+			mode_change_flag=1;
 		}
 	}
 	else {

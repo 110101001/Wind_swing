@@ -4,7 +4,7 @@ extern enum PendulumMode NS;	//NSÓÃÓÚÇÐ»»Ä£Ê½£¬StopÎªÍ£Ö¹Ä£Ê½£¬Task1µ½Task6·Ö±ðÎ
 //{ Stop=0,Task1,Task2,Task3,Task4,Task5,Task6 } ;
 
 extern float Roll,Pitch,Yaw;  
-uint32_t time_count;
+uint32_t time_count_begin;
 //int mode_flag=0,mode_change_flag=0;
 
 
@@ -69,7 +69,6 @@ void TIM5_IRQHandler(void)
 {
  static u32 Time_Ms=0;
 	static u32 Time_Last=0;
-	time_count=TIM2->CNT;
 	if(TIM_GetITStatus(TIM5,TIM_IT_Update)==SET) 
 	{
 		Time_Ms++;
@@ -79,23 +78,23 @@ void TIM5_IRQHandler(void)
   	IMUupdate(0.5f *((TIM2->CNT-Time_Last)/1000000.0f),mpu6050.Gyro_deg.x, mpu6050.Gyro_deg.y, mpu6050.Gyro_deg.z, //??IMU
 						mpu6050.Acc.x, mpu6050.Acc.y, mpu6050.Acc.z,&Roll,&Pitch,&Yaw);
 			Time_Last=TIM2->CNT;
+					if (Time_Ms%10==0)
+				{
+					ANO_AK8975_Read();	
+					Motor_X->now=Roll,Motor_Y->now=Pitch;
+						switch(NS)
+						{	
+							case Stop: Set_Motor(0,0); break;
+							case Task1: mode1(); break;
+							case Task2: mode2(); break;
+							case Task3: mode3(); break;
+							case Task4: mode4(); break;
+							case Task5: mode5(); break;
+							//case 6: mode6(); break;
+							default:break;
+						}	
+				}	
 		}
-		if (Time_Ms%10==0)
-		{
-			ANO_AK8975_Read();	
-			Motor_X->now=Roll,Motor_Y->now=Pitch;
-				switch(NS)
-	    	{	
-		    	case Stop: Set_Motor(0,0); break;
-			    case Task1: mode1(); break;
-		    	case Task2: mode2(); break;
-		    	case Task3: mode3(); break;
-			    case Task4: mode4(); break;
-			    case Task5: mode5(); break;
-			    //case 6: mode6(); break;
-			    default:break;
-		    }	
-		}	
 		DataTransferTask(Time_Ms);
 	//ANO_DT_Send_Status(Roll,Pitch,Yaw,Motor_X->ref,Motor_Y->ref,0);
 	TIM_ClearITPendingBit(TIM5,TIM_IT_Update);

@@ -6,7 +6,7 @@ extern enum PendulumMode NS;	//NSÓÃÓÚÇĞ»»Ä£Ê½£¬StopÎªÍ£Ö¹Ä£Ê½£¬Task1µ½Task6·Ö±ğÎ
 int main(){
 	All_Init();
 	mode_change_flag=1;
-	//NS=Task1;
+	NS=Task1;
 	Delay_ms(3000);
   while(1);  
 }
