@@ -124,8 +124,8 @@ void DataTransferTask(u32 sys_time)
 	}
 	else if((sys_time+2)%10==0)
 	{
-		if (send_pid1){ANO_DT_Send_PID(1,Motor_X->kp,Motor_X->ki,Motor_X->kd,
-																			Motor_Y->kp,Motor_Y->ki,Motor_Y->kd,
+		if (send_pid1){ANO_DT_Send_PID(1,-Motor_X->kp,-Motor_X->ki,-Motor_X->kd,
+																			-Motor_Y->kp,-Motor_Y->ki,-Motor_Y->kd,
 																			0,0,0);
 		send_pid1=0;}
 		else if(send_pid2){
@@ -256,12 +256,12 @@ if(*(data_buf+2)==0X02)
 	}
 		if(*(data_buf+2)==0X10)								//PID1
     {
-        Motor_X->kp  = 0.001*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
-        Motor_X->ki  = 0.001*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
-        Motor_X->kd  = 0.001*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
-        Motor_Y->kp = 0.001*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
-        Motor_Y->ki = 0.001*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
-        Motor_Y->kd = 0.001*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
+        Motor_X->kp = -0.001*( (vs16)(*(data_buf+4)<<8)|*(data_buf+5) );
+        Motor_X->ki = -0.001*( (vs16)(*(data_buf+6)<<8)|*(data_buf+7) );
+        Motor_X->kd = -0.1*( (vs16)(*(data_buf+8)<<8)|*(data_buf+9) );
+        Motor_Y->kp = -0.001*( (vs16)(*(data_buf+10)<<8)|*(data_buf+11) );
+        Motor_Y->ki = -0.001*( (vs16)(*(data_buf+12)<<8)|*(data_buf+13) );
+        Motor_Y->kd = -0.1*( (vs16)(*(data_buf+14)<<8)|*(data_buf+15) );
 //        RollP_arg.kp 	= 0.001*( (vs16)(*(data_buf+16)<<8)|*(data_buf+17) );
 //        RollP_arg.ki 	= 0.001*( (vs16)(*(data_buf+18)<<8)|*(data_buf+19) );
 //        RollP_arg.kd 	= 0.001*( (vs16)(*(data_buf+20)<<8)|*(data_buf+21) );
@@ -300,7 +300,7 @@ void ANO_DT_Send_PID(u8 group,float p1_p,float p1_i,float p1_d,float p2_p,float 
 	_temp = p1_i  * 1000;
 	data_to_send[_cnt++]=BYTE1(_temp);
 	data_to_send[_cnt++]=BYTE0(_temp);
-	_temp = p1_d  * 1000;
+	_temp = p1_d  * 10;//我考虑到d较大，只乘以10
 	data_to_send[_cnt++]=BYTE1(_temp);
 	data_to_send[_cnt++]=BYTE0(_temp);
 	_temp = p2_p  * 1000;
@@ -309,7 +309,7 @@ void ANO_DT_Send_PID(u8 group,float p1_p,float p1_i,float p1_d,float p2_p,float 
 	_temp = p2_i  * 1000;
 	data_to_send[_cnt++]=BYTE1(_temp);
 	data_to_send[_cnt++]=BYTE0(_temp);
-	_temp = p2_d * 1000;
+	_temp = p2_d * 10;//我考虑到d较大，只乘以10
 	data_to_send[_cnt++]=BYTE1(_temp);
 	data_to_send[_cnt++]=BYTE0(_temp);
 	_temp = p3_p  * 1000;
