@@ -44,13 +44,16 @@ void mode1()//15s内画不小于50cm直线
 	{
 		Delay_ms(3000);//使风力摆稳定下来
 	  calc_init(LASER_RADIUM_1);//0.25为半径
-    set_pid(Motor_X,-10,0,0);//20 10000 
-	  set_pid(Motor_Y,0,0,0);//0,-0.05,-1200
+    set_pid(Motor_X,-180,-0.1,-1000);//20 10000 
+	  set_pid(Motor_Y,0,-0.12,-2300);//0,-0.05,-1200
 	  mode_change_flag=0;
 		time_count_begin=TIM2->CNT;
 	}
 	  time=(double)((TIM2->CNT - time_count_begin)/1000000.0);
-		Motor_X->ref=max_angle_radian*cos(omega*time);
+		//Motor_X->ref=max_angle_radian*cos(omega*time);
+		Motor_X->ref=max_angle_radian;
+		if(ABS(Motor_X->now-Motor_X->ref)<5) Motor_X->ref=-Motor_X->ref;
+		//Motor_X->ref=max_angle_degree;
 		Motor_Y->ref=0;
 		pid_cal(Motor_X);
 		pid_cal(Motor_Y);
@@ -63,11 +66,15 @@ void mode2()//30-60cm直线
 	{
 		Delay_ms(3000);
 	  calc_init(LASER_RADIUM_2);//0.25为半径
+		set_pid(Motor_X,-180,-0.1,-1000);//20 10000 
+	  set_pid(Motor_Y,0,-0.12,-2300);//0,-0.05,-1200
 	  mode_change_flag=0;
 		time_count_begin=TIM2->CNT;
 	}
 	time=(double)((TIM2->CNT - time_count_begin)/1000000.0);
-	Motor_X->ref=max_angle_radian*cos(omega*time);
+	//Motor_X->ref=max_angle_radian*cos(omega*time);
+	Motor_X->ref=max_angle_radian;
+	if(ABS(Motor_X->now-Motor_X->ref)<1) Motor_X->ref=-Motor_X->ref;
   Motor_Y->ref=0;
 	pid_cal(Motor_X);
 	pid_cal(Motor_Y);

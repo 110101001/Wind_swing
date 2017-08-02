@@ -9,6 +9,7 @@ void set_pid(PID_Type* PID,float kp,float ki,float kd)
 	PID->ki=ki;
 	PID->kd=kd;
 	PID->errNow=PID->errOld1=PID->errOld2=0;
+	PID->output=0;
 }
 
 void pid_cal(PID_Type* PID)
